@@ -1,0 +1,25 @@
+package com.example.zino.gameapp;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+
+public class MainActivity extends AppCompatActivity {
+
+    GameView gameView;
+
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        gameView = (GameView) findViewById(R.id.gameView);
+        gameView.startGame();
+
+    }
+}
+
+
+
+
+
+
+
