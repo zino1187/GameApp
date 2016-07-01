@@ -15,10 +15,13 @@ public class Hero extends GameObject{
         super(gameView, width, height, x, y);
 
         bitmap= BitmapFactory.decodeResource(gameView.getResources() , R.drawable.spaceship);
+        //이미지 크기 재조정
+        bitmap=Bitmap.createScaledBitmap(bitmap,width,height, false);
+
     }
     public void tick() {
-        velX+=10;
-        //velY+=10;
+        //velX++;
+        //velY++;
 
         x=velX;
         y=velY;

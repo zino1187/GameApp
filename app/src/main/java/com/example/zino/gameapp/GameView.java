@@ -46,7 +46,7 @@ public class GameView extends View implements Runnable{
     //케릭터 및 모든 게임에 보여질 오브젝트 등장시키기
     public void init(){
         //주인공 생성하기!!
-        hero  = new Hero(this, 100,100,50,300);
+        hero  = new Hero(this, 200,200,50,300);
     }
 
     protected void onDraw(Canvas canvas) {
