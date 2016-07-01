@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 
 import java.util.Random;
@@ -117,6 +118,19 @@ public class GameView extends View implements Runnable{
         }
     }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        //터치를 하면, 총알 생성하자!!
+        Bitmap bitmap= BitmapFactory.decodeResource(getResources() , R.drawable.bullet);
+
+        //이미지 크기 재조정
+        bitmap=Bitmap.createScaledBitmap(bitmap,150,150, false);
+
+        Bullet bullet  = new Bullet(bitmap,this,70,70,0,200);
+        objectManager.addObject(bullet);
+
+        return super.onTouchEvent(event);
+    }
 }
 
 
