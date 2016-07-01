@@ -11,6 +11,9 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
+import java.util.Random;
+
+
 /*
   안드로이드건, 자바이건 모든 위젯 및 컴포넌트는 스스로를 그리기 때문에,
   개발자가 화면에 무언가를 직접 그래픽 처리하려면, 컴포넌트를 상속받아
@@ -68,8 +71,13 @@ public class GameView extends View implements Runnable{
         Bitmap bitmap= BitmapFactory.decodeResource(getResources() , R.drawable.enemy);
         //이미지 크기 재조정
         bitmap=Bitmap.createScaledBitmap(bitmap,150,150, false);
-        Enemy enemy = new Enemy(bitmap, this, 150,150, 1000 ,500);
-        objectManager.addObject(enemy); //오브젝트 관리자에게 주인공 등록시킴!!
+
+        Random random = new Random();
+
+        for(int i=0;i<20;i++) {
+            Enemy enemy = new Enemy(bitmap, this, 150, 150, random.nextInt(2000) , random.nextInt(800));
+            objectManager.addObject(enemy); //오브젝트 관리자에게 주인.공 등록시킴!!
+        }
     }
 
     protected void onDraw(Canvas canvas) {
