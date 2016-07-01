@@ -1,5 +1,6 @@
 package com.example.zino.gameapp;
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
 /*
@@ -11,6 +12,7 @@ import android.graphics.Canvas;
  * private > default > protected > public
  */
 abstract public class GameObject {
+    Bitmap bitmap;
     GameView gameView;
     int width;
     int height;
@@ -19,7 +21,8 @@ abstract public class GameObject {
     int velX; //x좌표에서의 증가량 - 움직이려면 이 값을 조정하면 된다
     int velY; //y좌표에서의 증가량 - 움직이려면 이 값을 조정하면 된다
 
-    public GameObject(GameView gameView, int width, int height, int x, int y) {
+    public GameObject(Bitmap bitmap, GameView gameView, int width, int height, int x, int y) {
+        this.bitmap=bitmap;
         this.gameView = gameView;
         this.width = width;
         this.height = height;

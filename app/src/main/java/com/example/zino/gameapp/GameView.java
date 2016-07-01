@@ -24,6 +24,7 @@ public class GameView extends View implements Runnable{
     Thread thread; //게임의 엔진 역할을 수행하는 쓰레드!!
     Handler handler;
     Hero hero;
+    ObjectManager objectManager;
 
     //이 뷰를 순수 자바코드에서 호출하는 것이 아니라, xml에서 호출할때는
     //xml의 속성들이 같이 전달되므로, 그 값들을 받을 객체인 AttributeSet을 명시해야 한다..
@@ -40,19 +41,41 @@ public class GameView extends View implements Runnable{
             }
         };
 
+
         init();
     }
 
     //케릭터 및 모든 게임에 보여질 오브젝트 등장시키기
     public void init(){
+        objectManager = new ObjectManager();
+
+        //주인공 생성하기
+        createHero();
+
+        //적군 생성하기!!
+        createEnemy();
+    }
+    public void createHero(){
         //주인공 생성하기!!
-        hero  = new Hero(this, 200,200,50,300);
+        Bitmap bitmap= BitmapFactory.decodeResource(getResources() , R.drawable.spaceship);
+        //이미지 크기 재조정
+        bitmap=Bitmap.createScaledBitmap(bitmap,200,200, false);
+        hero  = new Hero(bitmap, this, 200,200,50,300);
+        objectManager.addObject(hero); //오브젝트 관리자에게 주인공 등록시킴!!
+    }
+    public void createEnemy(){
+        //주인공 생성하기!!
+        Bitmap bitmap= BitmapFactory.decodeResource(getResources() , R.drawable.enemy);
+        //이미지 크기 재조정
+        bitmap=Bitmap.createScaledBitmap(bitmap,150,150, false);
+        Enemy enemy = new Enemy(bitmap, this, 150,150, 1000 ,500);
+        objectManager.addObject(enemy); //오브젝트 관리자에게 주인공 등록시킴!!
     }
 
     protected void onDraw(Canvas canvas) {
         //실제 그래픽 처리를 담당하는 객체는 Canvas이다!!!
         canvas.drawColor(Color.YELLOW); //색상을 그리다...
-        hero.render(canvas);
+        objectManager.render(canvas);
         super.onDraw(canvas);
     }
 
@@ -63,7 +86,7 @@ public class GameView extends View implements Runnable{
 
     //물리량의 변화를 처리하는 메서드!!
     public void tick(){
-        hero.tick();
+        objectManager.tick();
     }
 
     //화면에 그래픽 처리를 담당하는 메서드!!
